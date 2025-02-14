@@ -1,10 +1,11 @@
-﻿using API.Contracts;
+﻿using System.Collections.Concurrent;
+using API.Contracts;
 
 namespace API.Infrastructure;
 
 public class Store : IStore
 {
-    private readonly List<ImageRecord> _images = new();
+    private static readonly ConcurrentBag<ImageRecord> _images = new();
 
     public int AddImage(string description, string imageSrc)
     {
@@ -16,8 +17,18 @@ public class Store : IStore
         return _images.Count;
     }
 
-    public ImageRecord GetLastImage()
+    public ImageRecord? GetLastImage()
     {
+        if (_images.Count == 0)
+        {
+            return null;
+        }
+        
         return _images.Last();
+    }
+
+    public int GetLastEventsCount()
+    {
+        return _images.Count(image => image?.CreatedAt > DateTime.Now.AddHours(-1));
     }
 }

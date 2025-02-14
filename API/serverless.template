@@ -34,7 +34,7 @@
             "Type": "Api",
             "Properties": {
               "RestApiId": { "Ref": "ImageCatcherApi" },
-              "Path": "/images",
+              "Path": "/ImageCatcher",
               "Method": "GET"
             }
           },
@@ -42,16 +42,16 @@
             "Type": "Api",
             "Properties": {
               "RestApiId": { "Ref": "ImageCatcherApi" },
-              "Path": "/images",
+              "Path": "/ImageCatcher",
               "Method": "POST"
             }
           },
-          "DeleteImage": {
+          "GetLastEventsCount": {
             "Type": "Api",
             "Properties": {
               "RestApiId": { "Ref": "ImageCatcherApi" },
-              "Path": "/images/{id}",
-              "Method": "DELETE"
+              "Path": "/ImageCatcher/LastEventsCount",
+              "Method": "GET"
             }
           },
           "ProxyResource": {

@@ -1,0 +1,27 @@
+<app-counter></app-counter>
+
+<mat-card class="centered-card">
+  <ng-container *ngIf="!isFetching(); else loading">
+    <ng-container *ngIf="currentImage(); else noImage">
+      <img mat-card-image [src]="currentImage()?.imageSrc">
+      <mat-card-content *ngIf="currentImage()?.description">
+        <p>{{ currentImage()?.description }}</p>
+      </mat-card-content>
+      <mat-card-footer>
+        <p>Sent on: {{ currentImage()?.createdAt | date:'medium' }}</p>
+      </mat-card-footer>
+    </ng-container>
+  </ng-container>
+</mat-card>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noImage>
+  <mat-card-title class="md-padding">
+    <p>No image available.</p>
+  </mat-card-title>
+</ng-template>

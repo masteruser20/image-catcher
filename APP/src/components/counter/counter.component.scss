@@ -1,0 +1,14 @@
+:host {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+
+  .counter-box {
+    background-color: blueviolet;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: white;
+    font-size: 32px;
+  }
+}

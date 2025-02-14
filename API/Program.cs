@@ -7,7 +7,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IStore, Store>();
+builder.Services.AddScoped<IStore, Store>();
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
 
 var app = builder.Build();

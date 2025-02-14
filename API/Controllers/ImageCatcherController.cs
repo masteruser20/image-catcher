@@ -13,14 +13,30 @@ public class ImageCatcherController(ILogger<ImageCatcherController> logger, ISen
     private readonly ILogger<ImageCatcherController> _logger = logger;
 
     [HttpPost]
-    public async Task<int> Store(AddImageCommand command)
+    public async Task<ActionResult<int>> Store(AddImageCommand command)
     {
-        return await sender.Send(command);
+        var result = await sender.Send(command);
+
+        return CreatedAtAction(nameof(Get), new { id = result }, result);
     }
 
     [HttpGet]
-    public async Task<ImageRecord> Get()
+    public async Task<ActionResult<ImageRecord>> Get()
     {
-        return await sender.Send(new GetImageQuery());
+        var image = await sender.Send(new GetImageQuery());
+        if (image == null)
+        {
+            return NotFound("No image found.");
+        }
+
+        return Ok(image);
+    }
+
+    [HttpGet("LastEventsCount")]
+    public async Task<ActionResult<int>> GetLastEventsCount()
+    {
+        var count = await sender.Send(new GetLastEventsCountQuery());
+
+        return Ok(count);
     }
 }

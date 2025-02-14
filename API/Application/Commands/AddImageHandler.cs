@@ -8,6 +8,7 @@ public class AddImageHandler(IStore store) : IRequestHandler<AddImageCommand, in
     public Task<int> Handle(AddImageCommand request, CancellationToken cancellationToken)
     {
         var count = store.AddImage(request.Description, request.ImageUrl);
+
         return Task.FromResult(count);
     }
 }
